@@ -1,4 +1,4 @@
-.PHONY: test lint build clean install push install-twine update lock env
+.PHONY: test lint build clean install update lock env
 
 ## lock (not sure if we can parse this, but for visibility of dependencies)
 lock:
@@ -12,21 +12,7 @@ test:
 lint:
 	python -m isort tests
 	python -m black tests
-	python -m isort oramal
-	python -m black oramal
-	python -m isort ./setup.py
-	python -m black ./setup.py
 
-## build python module (run build)
-build:
-	rm -rf build/ dist/ oramal.egg-info
-	python setup.py sdist
-
-## clean (clean rust build)
-clean:
-	rm -rf build/ dist/ oramal.egg-info
-	rm -rf orama-rs/target
-	rm -rf oramal/orama-rs
 
 ## update the env file and update
 update:
@@ -37,17 +23,6 @@ update:
 env:
 	conda env create -f environment.yml
 	# poetry install  # install the local package
-
-## push to artifact registry
-push:
-	twine upload --repository-url https://asia-northeast1-python.pkg.dev/ai-lab-sandbox/ai-lab-pypi dist/*
-
-## install twine dependency
-install-twine:
-	python -m pip install --upgrade pip
-	pip install wheel twine
-	pip install keyring
-	pip install keyrings.google-artifactregistry-auth
 
 #################################################################################
 # Self Documenting Commands                                                     #
