@@ -1,0 +1,13 @@
+name: ann-faiss
+channels:
+  - pytorch 
+dependencies:
+  - python=3.8   # or 2.7
+  - numpy
+  - pytorch
+  - faiss-cpu
+  - black
+  - isort
+  - jupyterlab
+#  - pip:
+#    - Flask-Testing
